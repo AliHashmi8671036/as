@@ -1,0 +1,8 @@
+/* In CSS, there are five type of selectors;
+1. Element selector h1 { }
+2. Class selector .heading-style { }
+3. ID Selector #heading-top { }
+4. Attribute Selector p[draggable] { } or p[draggable="true"]{ }
+5. Universal Selector * { }
+
+*/
