@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Flexbox</title>
+  <style>
+    .flex-container {
+      display: flex;
+    }
+
+    .card {
+      background-color: chocolate;
+      border: 20px solid white;
+      height: 200px;
+      flex: 1;
+      text-align: center;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .first {
+      height: 100px;
+    }
+
+    .footer {
+      height: 100px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <h1>CSS Flexbox</h1>
+  <div class="flex-container">
+    <div class="first card"><h2>Header</h2></div>
+  </div>
+  <div class="flex-container">
+    <div class="card"><h3>Body</h3></div>
+    <div class="card"><h3>Body</h3></div>
+    <div class="card"><h3>Body</h3></div>
+  </div>
+  <div class="flex-container">
+    <div class="middle card"><h2>Middle</h2></div>
+    </div>
+  <div class="flex-container">
+    <div class="card"><h3>Body</h3></div>
+    <div class="card"><h3>Body</h3></div>
+    <div class="card"><h3>Body</h3></div>
+  </div>
+  <div class="flex-container">
+    <div class="footer card"><h2>Footer</h2></div>
+  </div>
+
+
+</body>
+
+</html>
