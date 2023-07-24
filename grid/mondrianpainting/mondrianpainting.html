@@ -1,0 +1,147 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Mondrian Project</title>
+  <style>
+    /* 
+    Write your CSS here 
+    Gap Colour: #000
+    White: #F0F1EC
+    Red: #E72F24
+    Black: #232629
+    Blue: #004592
+    Yellow: #F9D01E
+
+    For dimensions, see dimensions.png image.
+    HINT: Remember you can't change the properties of grid lines.
+    But grid lines are transparent!
+    
+      
+    */
+    .container {
+      height: 748px;
+      width: 748px;
+      display: grid;
+      grid-template-columns: 320px 198px 153px 50px;
+      grid-template-rows: 414px 130px 155px 20px;
+      gap: 9px;
+    }
+    .item {
+      background-color: #F0F1EC;
+    } 
+    .red {
+      background-color: #E72F24;
+    }
+    .blue {
+      background-color: #004592;
+    }
+    .yellow {
+      background-color: #F9D01E;
+    }
+    .black {
+      background-color: #232629;
+    }
+  </style>
+</head>
+
+<body> -->
+  <!-- Write your HTML here -->
+  <!-- <div class="container">
+    </div class="E72F24"></div>
+    </div class=""></div>
+    </div class=""></div>
+    </div class=""></div>
+
+    </div class=""></div>
+    </div class=""></div>
+    </div class=""></div>
+    </div class=" "></div>
+
+    </div class=""></div>
+    </div class=" "></div>
+    </div class=" "></div>
+    </div class=""></div>
+  </div>
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mondrian Project</title>
+  <style>
+    .container {
+      width: 748px;
+      height: 748px;
+      display: grid;
+      grid-template-columns: 320px 198px 153px 50px;
+      grid-template-rows: 414px 130px 155px 22px;
+      gap: 9px;
+      background-color: #000;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    .item {
+      background-color: #F0F1EC;
+    }
+
+    .red {
+      background-color: #E72F24;
+    }
+    .blue {
+      background-color: #004592;
+      border-bottom: 10px solid black;
+    }
+    .yellow {
+      background-color: #F9D01E;
+    }
+    .black {
+      background-color: #232629;
+    }
+    .white1 {
+      grid-column: 2 / 5;
+      background-color: #F0F1EC;
+    }
+    .white2 {
+      grid-column: 1 / 2;
+      grid-row: 2 / 4;
+      background-color: #F0F1EC;
+    }
+    .white3 {
+      grid-column: 2 / 4;
+      grid-row: 2 / 4;
+      background-color: #F0F1EC;
+    }
+    .white4 {
+      grid-row: 3 / 5;
+      background-color: #F0F1EC;
+    }
+    .white5 {
+      background-color: #F0F1EC;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="item red"></div>
+    <div class="item white1"></div>
+    <div class="item white2"></div>
+    <div class="item white3"></div>
+    <div class="item blue"></div>
+    <div class="item white4"></div>
+    <div class="item white5"></div>
+    <div class="item yellow"></div>
+    <div class="item black"></div>
+  </div>
+</body>
+
+</html>
