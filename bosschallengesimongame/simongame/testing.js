@@ -9,9 +9,36 @@ var clicklen = 0;
 gameStart();
 userClick();
 
-
-
+function gameStart() {    
+    $(document).keypress(function() { 
+        $("#level-title").text("Level "+level);
+        nextSequence();
+    });
+}
+function userClick() {
+    $(".btn").click(function() {
+        var gamePatternlen = gamePattern.length;
+          
+        if (clicklen < gamePatternlen) {
+            var userChosenColour = $(this).attr("id");
+            userClickedPattern.push(userChosenColour);
+            playSound(userChosenColour);
+            animatePress(userChosenColour);
+        }     
+        clicklen++;        
+    });
+    checkAnswer(userClickedPattern);
+}
+function nextSequence() {
+    var randomNumber = Math.random();
+    randomNumber = Math.floor(randomNumber*4);
+    var randomChosenColour = buttonColours[randomNumber];
+    gamePattern.push(randomChosenColour);
+    $("#"+randomChosenColour).fadeOut(100).fadeIn(100);
+    playSound(randomChosenColour);
+}
 function checkAnswer(currentLevel) {
+    level++;
     var n = currentLevel.length;
     n--;
     if (gamePattern[n]==currentLevel[n]) {
@@ -27,34 +54,6 @@ function checkAnswer(currentLevel) {
 
     }
 }
-function gameStart() {    
-    $(document).keypress(function() { 
-        $("#level-title").text("Level "+level);
-        nextSequence();
-    });
-}
-function userClick() {
-    $(".btn").click(function() {
-        var gamePatternlen = gamePattern.length;  
-        if (clicklen < gamePatternlen) {
-            var userChosenColour = $(this).attr("id");
-            userClickedPattern.push(userChosenColour);
-            playSound(userChosenColour);
-            animatePress(userChosenColour);
-            checkAnswer(userClickedPattern);
-        }     
-        clicklen++;        
-    });
-}
-function nextSequence() {
-    var randomNumber = Math.random();
-    randomNumber = Math.floor(randomNumber*4);
-    var randomChosenColour = buttonColours[randomNumber];
-    gamePattern.push(randomChosenColour);
-    $("#"+randomChosenColour).fadeOut(100).fadeIn(100);
-    playSound(randomChosenColour);
-}
-
 function playSound(name) {
     var aud = new Audio("./sounds/"+name+".mp3");
     aud.play();
