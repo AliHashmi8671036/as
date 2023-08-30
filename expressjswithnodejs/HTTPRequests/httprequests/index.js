@@ -14,6 +14,22 @@ app.get("/contact", (req, res) => {
     res.send("<h1>Contact Me</h1><p>Phone: +1234512345.</p>");
 })
 
+app.post("/register", (req, res) => {
+    res.sendStatus(201);
+})
+
+app.put("/user/alishams", (req, res) => {
+    res.sendStatus(200);
+})
+
+app.patch("/user/alishams", (req, res) => {
+    res.sendStatus(200);
+})
+
+app.delete("/user/alishams", (req, res) => {
+    res.sendStatus(200);
+})
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 })
