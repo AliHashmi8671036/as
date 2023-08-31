@@ -7,12 +7,14 @@ import { fileURLToPath } from "url";
 const app = express();
 const port = 3000;
 const dirnamepath = dirname(fileURLToPath(import.meta.url));
+var bandName = "";
+var result;
 
 app.use(bodyParser.urlencoded({extended: true}));
 
 function bandNameGenerator(req, res, next) {
-  console.log(req.body);
-  bandName = req.body["street"] + req.body["pet"];
+  result = req.body;
+  bandName = result.street + result.pet;
   next();
 }
 
