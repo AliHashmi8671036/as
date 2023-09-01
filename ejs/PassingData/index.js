@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 
 const app = express();
 const port = 3000;
+// var data = "";
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -11,11 +12,10 @@ app.get("/", (req, res) => {
 });
 
 app.post("/submit", (req, res) => {
+  const nameLen = req.body["fName"].length+req.body["lName"].length;
   res.render("index.ejs", 
-  { fName: req.body["fName"],
-    lName: req.body["lName"]
+  { nameOfLen: nameLen
   });
-  console.log(req.body["fName"].length);
 });
 
 app.listen(port, () => {
