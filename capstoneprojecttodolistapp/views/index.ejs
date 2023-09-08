@@ -1,0 +1,32 @@
+<%- include("header.ejs") %>
+    <h1>
+      <%= new Date().getDate().getMonth().getDay() %>
+    </h1>    
+<% if(locals.todolists) { %>
+    <ul class="list-group">
+        <% for(let i=0; i<todolists.length; i++) { %>
+            <li class="item">
+                <input type="checkbox">
+                <%= todolists[i] %>
+            </li>
+        <% } %>
+    </ul>
+<% } %> 
+<%# else { %>
+    <!-- <ul>
+        <%# for(let i=0; i<locals.todolists.length; i++) { %>
+            <li>
+                <%#= locals.todolists[i] %>
+            </li>
+        <%# } %>
+    </ul>
+<%# } %> -->
+
+
+    
+<form method="POST" action="/add">
+    <input type="text" name="taskName" placeholder="Enter the task">
+    <input type="submit" value="add">
+</form>
+
+<%- include("footer.ejs") %>
