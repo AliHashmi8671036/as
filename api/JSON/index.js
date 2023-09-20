@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import { name } from "ejs";
 
 const app = express();
 const port = 3000;
@@ -23,19 +24,50 @@ app.post("/recipe", (req, res) => {
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
   const data = JSON.parse(recipeJSON);
   if(req.body["choice"]=="chicken") {
+    // console.log(data[0]["name"]);
     res.render("index.ejs", 
     {
-      recipes: data[0]
+      recipeName: data[0]["name"],
+      ingreProName: data[0]["ingredients"]["protein"]["name"],
+      ingreProPrep: data[0]["ingredients"]["protein"]["preparation"],
+      ingreSalName: data[0]["ingredients"]["salsa"]["name"],
+      ingreTopName1: data[0]["ingredients"]["toppings"][0]["name"],
+      ingreTopQuan1: data[0]["ingredients"]["toppings"][0]["quantity"],
+      ingreTopName2: data[0]["ingredients"]["toppings"][1]["name"],
+      ingreTopQuan2: data[0]["ingredients"]["toppings"][1]["quantity"],
+      ingreTopName3: data[0]["ingredients"]["toppings"][2]["name"],
+      ingreTopQuan3: data[0]["ingredients"]["toppings"][2]["quantity"],
+      ingreTopName4: data[0]["ingredients"]["toppings"][3]["name"],
+      ingreTopQuan4: data[0]["ingredients"]["toppings"][3]["quantity"],
+      
     });
   } else if (req.body["choice"]=="beef") {
     res.render("index.ejs", 
     {
-      recipes: data[1]
+      recipeName: data[1]["name"],
+      ingreProName: data[1]["ingredients"]["protein"]["name"],
+      ingreProPrep: data[1]["ingredients"]["protein"]["preparation"],
+      ingreSalName: data[1]["ingredients"]["salsa"]["name"],
+      ingreTopName1: data[1]["ingredients"]["toppings"][0]["name"],
+      ingreTopQuan1: data[1]["ingredients"]["toppings"][0]["quantity"],
+      ingreTopName2: data[1]["ingredients"]["toppings"][1]["name"],
+      ingreTopQuan2: data[1]["ingredients"]["toppings"][1]["quantity"],
+      ingreTopName3: data[1]["ingredients"]["toppings"][2]["name"],
+      ingreTopQuan3: data[1]["ingredients"]["toppings"][2]["quantity"],
     });
   } else if (req.body["choice"]=="fish") {
     res.render("index.ejs", 
     {
-      recipes: data[2]
+      recipeName: data[2]["name"],
+      ingreProName: data[2]["ingredients"]["protein"]["name"],
+      ingreProPrep: data[2]["ingredients"]["protein"]["preparation"],
+      ingreSalName: data[2]["ingredients"]["salsa"]["name"],
+      ingreTopName1: data[2]["ingredients"]["toppings"][0]["name"],
+      ingreTopQuan1: data[2]["ingredients"]["toppings"][0]["quantity"],
+      ingreTopName2: data[2]["ingredients"]["toppings"][1]["name"],
+      ingreTopQuan2: data[2]["ingredients"]["toppings"][1]["quantity"],
+      ingreTopName3: data[2]["ingredients"]["toppings"][2]["name"],
+      ingreTopQuan3: data[2]["ingredients"]["toppings"][2]["quantity"],
     });
   }
   
