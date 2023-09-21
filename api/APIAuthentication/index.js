@@ -19,10 +19,12 @@ app.get("/noAuth", async (req, res) => {
   //TODO 2: Use axios to hit up the /random endpoint
   //The data you get back should be sent to the ejs file as "content"
   //Hint: make sure you use JSON.stringify to turn the JS object from axios into a string.
-  const response = await axios.get(`${API_URL}random`);
-  const result = response.data;
-  const data = JSON.stringify(result);
-  res.render("index.ejs", {content: data});
+  try {
+    const response = await axios.get(API_URL + "random");
+    res.render("index.ejs", { content: JSON.stringify(response.data) });
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
 });
 
 app.get("/basicAuth", async (req, res) => {
@@ -38,26 +40,40 @@ app.get("/basicAuth", async (req, res) => {
       },
     });
   */
-    axios.get(API_URL, {
-      auth: {
-        username: yourUsername,
-        password: yourPassword,
-      }
-       
-    });
-    // console.log(basicAuth);
-    // const response = await axios.get(`${API_URL}all?page=2`);
-    // const result = response.data;
-    // const data = JSON.stringify(result);
-    // res.render("index.ejs", {content: data});
-});
+    try {
+      const response = await axios.get(
+        API_URL + "all?page=2", 
+        {},
+        { 
+          auth: {
+            username: yourUsername,
+            password: yourPassword,
+          },
+        }
+      );
+      res.render("index.ejs", { content: JSON.stringify(response.data), });
+    } catch (error) {
+      res.status(404).send(error.message);
+    }  
+  });
 
-app.get("/apiKey", (req, res) => {
+app.get("/apiKey", async (req, res) => {
   //TODO 4: Write your code here to hit up the /filter endpoint
   //Filter for all secrets with an embarassment score of 5 or greater
   //HINT: You need to provide a query parameter of apiKey in the request.
-
-  res.render("index.ejs", {content: "apikey"})
+  try {
+    const response = await axios.get(
+      API_URL + "filter", {
+      params: {
+        score: 5,
+        apiKey: yourAPIKey,
+      },
+    });
+    res.render("index.ejs", {content: JSON.stringify(response.data), });
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+  
 });
 
 app.get("/bearerToken", (req, res) => {
