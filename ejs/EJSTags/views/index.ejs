@@ -17,16 +17,14 @@
     <%= seconds %>
   </p>
   <% if (seconds % 2===0) { %>
-  <ul>
-    <!-- List goes here if current second is even. -->
-    <!-- Otherwise it should display the following: -->
-    <!-- <p>No items to display</p> -->
-    <% for(let i=0; i<items.length; i++) { %>
-      <li>
-        <%= items[i] %>
-      </li>
+    <ul>
+      <!-- List goes here if current second is even. -->
+      <!-- Otherwise it should display the following: -->
+      <!-- <p>No items to display</p> -->
+      <% for (let i=0; i < items.length; i++) { %>
+        <li> <%= items[i] %> </li>
       <% } %>
-  </ul>
+    </ul>
   <% } else { %>
     <p>No items to display</p>
   <% } %>
@@ -36,7 +34,7 @@
   </p>
 
   <!-- Footer goes here -->
-  <%- include("footer.ejs")%>
+  <%- include("footer.ejs") %>
 </body>
 
 </html>
