@@ -4,19 +4,15 @@ import bodyParser from "body-parser";
 const app = express();
 const port = 3000;
 
-
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.render("index.ejs", {});
+  res.render("index.ejs");
 });
 
 app.post("/submit", (req, res) => {
-  res.render("index.ejs", {
-    firstName : req.body['fName'],
-    lastName: req.body['lName'],
-    nameLength: req.body['fName'].length + req.body['lName'].length,
-  });
+  const numLetters = req.body["fName"].length + req.body["lName"].length;
+  res.render("index.ejs", { numberOfLetters: numLetters });
 });
 
 app.listen(port, () => {
