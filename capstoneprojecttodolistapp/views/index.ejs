@@ -1,7 +1,9 @@
 <%- include("header.ejs") %>
-    <h1>
-      <%= new Date().getDate().getMonth().getDay() %>
-    </h1>    
+    <div class="box" id="heading">
+        <h1>
+            <%= new Date() %>
+          </h1>
+    </div>    
 <% if(locals.todolists) { %>
     <ul class="list-group">
         <% for(let i=0; i<todolists.length; i++) { %>

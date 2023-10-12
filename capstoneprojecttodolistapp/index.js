@@ -6,8 +6,17 @@ const port = 3000;
 var todolist = [];
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
+    res.render("index.ejs");
+})
+
+app.get("/today", (req, res)=> {
+    res.render("index.ejs");
+})
+
+app.get("/work", (req, res)=> {
     res.render("index.ejs");
 })
 
