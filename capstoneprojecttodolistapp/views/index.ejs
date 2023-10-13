@@ -9,22 +9,20 @@
         <%# listComplete.push(locals.todolists); %>
         <%#= listComplete %>
 
-
-        <% if(locals.todolists) { %>
-            <ul class="list-group">
-                <% for(let i=0; i<todolists.length; i++) { %>
-                    <li class="item">
-                        <div class="item">
-                            <input type="checkbox">
-                            <p>
-                                <%= todolists[i] %>
-                            </p>
-                        </div>
-                    </li>
-                <% } %>
-            </ul>
-        <% }  %> 
-        
+        <% list = [] %>
+        <ul class="list-group">
+            <% for(let i=0; i<list.length; i++) { %>
+                <li class="item">
+                    <div class="item">
+                        <input type="checkbox">
+                        <p>
+                            <%= list[i] %>                                
+                        </p>
+                    </div>
+                </li>
+            <% } %>    
+        </ul>
+        <% list.push(locals.todolists); %>
         
         <form method="post" action="/">
             <input type="text" name="taskName" placeholder="New Item" autocomplete="off">

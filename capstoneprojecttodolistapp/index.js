@@ -3,7 +3,6 @@ import bodyParser from "body-parser";
 
 const app = express();
 const port = 3000;
-var todolist = [];
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -25,9 +24,8 @@ app.get("/", (req, res) => {
 })
 app.post("/", (req, res)=> {
     // console.log(req.body["taskName"]);
-    todolist.push(req.body["taskName"]); 
     res.render("index.ejs", {
-        todolists: todolist,
+        todolists: req.body["taskName"],
         datetoDisplayed: datetoDisplay,
     });
     console.log(todolist);
