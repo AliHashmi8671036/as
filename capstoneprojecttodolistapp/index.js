@@ -8,25 +8,28 @@ var todolist = [];
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-    res.render("index.ejs");
-})
+let weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+let monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const date = new Date();
+const day = weekDays[date.getDay()];
+const month = monthName[date.getMonth()];
+const dat = date.getDate();
 
-app.get("/today", (req, res)=> {
-    res.render("index.ejs");
+const datetoDisplay = day +", "+ month +" "+ dat ;
+
+
+app.get("/", (req, res) => {
+    console.log(req.body["taskName"]);
+    todolist.push(req.body["taskName"]);
+    res.render("index.ejs", {
+        datetoDisplayed: datetoDisplay,
+        todolists: todolist
+    });
 })
 
 app.get("/work", (req, res)=> {
     res.render("index.ejs");
-})
-
-app.post("/add", (req, res)=> {
-    todolist.push(req.body["taskName"]);
-    res.render("index.ejs", {
-        todolists: todolist
-    });
-    // console.log(todolist);
-})
+});
 
 app.listen(port, (req, res)=> {
     console.log(`Listening on port ${port}.`);

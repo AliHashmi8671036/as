@@ -1,20 +1,40 @@
 <%- include("header.ejs") %>
     <div class="box" id="heading">
         <h1>
-            <%= new Date() %>
+            <%= datetoDisplayed %>
           </h1>
     </div>    
-<% if(locals.todolists) { %>
-    <ul class="list-group">
-        <% for(let i=0; i<todolists.length; i++) { %>
-            <li class="item">
-                <input type="checkbox">
-                <%= todolists[i] %>
-            </li>
-        <% } %>
-    </ul>
-<% } %> 
-<%# else { %>
+    <div class="box">
+        <% if(locals.todolists) { %>
+            <ul class="list-group">
+                <% for(let i=0; i<todolists.length; i++) { %>
+                    <li class="item">
+                        <div class="item">
+                            <input type="checkbox">
+                            <p>
+                                <input type="checkbox">
+                                <%= todolists[i] %>
+                            </p>
+                        </div>
+                    </li>
+                <% } %>
+            </ul>
+        <% } %> 
+        
+        
+        <form method="POST" action="/">
+            <input type="text" name="taskName" placeholder="New Item" autocomplete="off">
+            <button type="submit" name="taskName">+</button>
+        </form>
+    </div>
+
+<%- include("footer.ejs") %>
+
+<!-- <form class="item" action="/" method="post">
+    <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+    <button type="submit" name="list" value="Friday," october="" 13="">+</button>
+  </form> -->
+  <%# else { %>
     <!-- <ul>
         <%# for(let i=0; i<locals.todolists.length; i++) { %>
             <li>
@@ -23,12 +43,3 @@
         <%# } %>
     </ul>
 <%# } %> -->
-
-
-    
-<form method="POST" action="/add">
-    <input type="text" name="taskName" placeholder="Enter the task">
-    <input type="submit" value="add">
-</form>
-
-<%- include("footer.ejs") %>
