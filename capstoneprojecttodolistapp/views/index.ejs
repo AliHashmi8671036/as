@@ -1,10 +1,15 @@
 <%- include("header.ejs") %>
     <div class="box" id="heading">
         <h1>
-            <%= datetoDisplayed %>
+            <%= locals.datetoDisplayed %>
           </h1>
     </div>    
     <div class="box">
+        <%# const listComplete = []; %>
+        <%# listComplete.push(locals.todolists); %>
+        <%#= listComplete %>
+
+
         <% if(locals.todolists) { %>
             <ul class="list-group">
                 <% for(let i=0; i<todolists.length; i++) { %>
@@ -12,19 +17,18 @@
                         <div class="item">
                             <input type="checkbox">
                             <p>
-                                <input type="checkbox">
                                 <%= todolists[i] %>
                             </p>
                         </div>
                     </li>
                 <% } %>
             </ul>
-        <% } %> 
+        <% }  %> 
         
         
-        <form method="POST" action="/">
+        <form method="post" action="/">
             <input type="text" name="taskName" placeholder="New Item" autocomplete="off">
-            <button type="submit" name="taskName">+</button>
+            <button>+</button>
         </form>
     </div>
 

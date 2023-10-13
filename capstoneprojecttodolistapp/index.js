@@ -19,17 +19,25 @@ const datetoDisplay = day +", "+ month +" "+ dat ;
 
 
 app.get("/", (req, res) => {
-    console.log(req.body["taskName"]);
-    todolist.push(req.body["taskName"]);
     res.render("index.ejs", {
         datetoDisplayed: datetoDisplay,
-        todolists: todolist
     });
 })
+app.post("/", (req, res)=> {
+    // console.log(req.body["taskName"]);
+    todolist.push(req.body["taskName"]); 
+    res.render("index.ejs", {
+        todolists: todolist,
+        datetoDisplayed: datetoDisplay,
+    });
+    console.log(todolist);
+});
 
-app.get("/work", (req, res)=> {
+app.get("/work", (req, res)=> { 
     res.render("index.ejs");
 });
+
+
 
 app.listen(port, (req, res)=> {
     console.log(`Listening on port ${port}.`);
