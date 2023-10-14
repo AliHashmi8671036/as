@@ -13,22 +13,19 @@ const date = new Date();
 const day = weekDays[date.getDay()];
 const month = monthName[date.getMonth()];
 const dat = date.getDate();
-
+const listed = [];
 const datetoDisplay = day +", "+ month +" "+ dat ;
 
 
 app.get("/", (req, res) => {
     res.render("index.ejs", {
         datetoDisplayed: datetoDisplay,
+        todolists : listed,
     });
 })
 app.post("/", (req, res)=> {
-    // console.log(req.body["taskName"]);
-    res.render("index.ejs", {
-        todolists: req.body["taskName"],
-        datetoDisplayed: datetoDisplay,
-    });
-    console.log(todolist);
+    listed.push(req.body["taskName"])
+    res.redirect("/");
 });
 
 app.get("/work", (req, res)=> { 
