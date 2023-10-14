@@ -1,0 +1,51 @@
+<% if(locals.todolists) { 
+    const count = listed.push(todolists);
+    console.log(count);
+    console.log(listed); 
+    %>
+    <ul class="list-group">
+    <% listed.forEach(item => { %>
+        <li class="item">
+            <div class="item">
+                <input type="checkbox">
+                <p>
+                    <%= item %>                                
+                </p>
+            </div>
+        </li>
+    
+    <% }); %>
+<% } else { %>
+    
+<% } %>
+</ul>
+<!-- <form class="item" action="/" method="post">
+    <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+    <button type="submit" name="list" value="Friday," october="" 13="">+</button>
+  </form> -->
+  <%# else { %>
+    <!-- <ul>
+        <%# for(let i=0; i<locals.todolists.length; i++) { %>
+            <li>
+                <%#= locals.todolists[i] %>
+            </li>
+        <%# } %>
+    </ul>
+<%# } %> -->
+
+<% const listed = ['January', 'February', 'March', 'April', 'May', 'June']; %>
+    <%# (let i=0; i<listed.length; i++) { %>
+                   <%# } %>   
+                   
+                   <%# todolists.forEach(item => { %>
+                <li class="item">
+                    <div class="item">
+                        <input type="checkbox">
+                        <p>
+                            <%= locals.todolists %>  
+                                                          
+                        </p>
+                    </div>
+                </li>
+        
+        <%# }); %>
