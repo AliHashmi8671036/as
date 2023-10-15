@@ -4,23 +4,33 @@
             <%= locals.datetoDisplayed %>
           </h1>
     </div>    
-    <div class="box">       
+    <% const todolisted = ['asdf', 'asd', 'as', 'a', 'qwer', 'qwe', 'qw', 'q']; %>
+    <div class="box">      
         <ul class="list-group"> 
-            <% for(let i=0; i<todolists.length; i++) { %>
+            <% for(let i=0; i<todolisted.length; i++) { %>
                 <li class="item">
                     <div class="item">
                         <input type="checkbox">
                         <p>
-                            <%= todolists[i] %>  
-                                                          
+                            <%= todolisted[i] %>
                         </p>
                     </div>
                 </li>
             <% } %>
+            <% if(locals.todolists) { %>
+                <% for(let i=0; i<todolists.length; i++) { %>
+                    <li class="item">
+                        <div class="item">
+                            <input type="checkbox">
+                            <p>
+                                <%= todolists[i] %>
+                            </p>
+                        </div>
+                    </li>
+                <% } %> 
+            <% }  %>
         </ul>
             
-             
-        
         <form method="post" action="/">
             <input type="text" name="taskName" placeholder="New Item" autocomplete="off">
             <button>+</button>

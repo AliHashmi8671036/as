@@ -17,24 +17,26 @@
   <div id="recipeContainer" class="hidden">
 
     <!-- If no recipe yet, show: -->
-    <% if(!locals.recipeName) { %>
-      <h2>Pick your favourite taco ingredient 👆</h2>
-    <% } else { %>
-    <!-- Else, show the recipe name e.g. <h2>Recipe name</h2>-->
-      <h2><%= recipeName %></h2>
+    <% if(locals.name) { %>
+      <br>
+      <h2><%= name %></h2> 
       <h3>Ingredients:</h3>
       <ul id="ingredientsList">
-        <li><%= ingreProName %><%- ",  " %><%= ingreProPrep %></li>
-        <li><%= ingreSalName %></li>
-        <li><%= ingreTopQuan1  %><%- " of  " %><%= ingreTopName1 %></li>
-        <li><%= ingreTopQuan2  %><%- " of  " %><%= ingreTopName2 %></li>
-        <li><%= ingreTopQuan3  %><%- " of  " %><%= ingreTopName3 %></li>
-        <li><% if(locals.ingreTopName4) { %> 
-          <%= ingreTopQuan4  %><%- " of  " %><%= ingreTopName4 %>
-          <% } %>
-        </li>
+        <li><%= protein %></li>
+        <li><%= salsa %></li>
+        <li><%= topping1 %></li>
+        <li><%= topping2 %></li>
+        <li><%= topping3 %></li>
+        <% if(locals.topping4) { %>
+          <li><%= topping4 %></li>
+        <% } %>
       </ul>
+    <% } else { %>
+      <h2>Pick your favourite taco ingredient 👆</h2>
     <% } %>
+    
+    <!-- Else, show the recipe name e.g. <h2>Recipe name</h2>-->
+
 
   </div>
 </body>

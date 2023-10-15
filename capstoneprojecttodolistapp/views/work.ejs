@@ -1,0 +1,42 @@
+<%- include("header.ejs") %>
+    <div class="box" id="heading">
+        <h1>
+            Work List
+          </h1>
+    </div> 
+    <% const worklisted = ['xcvb', 'xcv', 'xc', 'x', 'hjkl', 'hjk', 'hj', 'h']; %>
+    <div class="box">      
+        <ul class="list-group"> 
+            <% for(let i=0; i<worklisted.length; i++) { %>
+                <li class="item">
+                    <div class="item">
+                        <input type="checkbox">
+                        <p>
+                            <%= worklisted[i] %>
+                        </p>
+                    </div>
+                </li>
+            <% } %>
+            <% if(locals.worklists) { %>
+                <% for(let i=0; i<worklists.length; i++) { %>
+                    <li class="item">
+                        <div class="item">
+                            <input type="checkbox">
+                            <p>
+                                <%= worklists[i] %>
+                            </p>
+                        </div>
+                    </li>
+                <% } %> 
+            <% }  %>
+        </ul>   
+    
+            
+        <form method="post" action="/work">
+            <input type="text" name="workName" placeholder="New Item" autocomplete="off">
+            <button type="submit">+</button>
+        </form>
+    </div>
+
+<%- include("footer.ejs") %>
+

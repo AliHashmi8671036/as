@@ -14,6 +14,7 @@ const day = weekDays[date.getDay()];
 const month = monthName[date.getMonth()];
 const dat = date.getDate();
 const listed = [];
+const worklist = [];
 const datetoDisplay = day +", "+ month +" "+ dat ;
 
 
@@ -28,8 +29,16 @@ app.post("/", (req, res)=> {
     res.redirect("/");
 });
 
-app.get("/work", (req, res)=> { 
-    res.render("index.ejs");
+app.get("/work", (req, res) => {
+    res.render("work.ejs", {
+        worklists: worklist,
+    })
+})
+
+
+app.post("/work", (req, res)=> {
+    worklist.push(req.body["workName"]); 
+    res.redirect("/work");
 });
 
 
