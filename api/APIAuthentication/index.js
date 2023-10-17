@@ -8,8 +8,8 @@ const API_URL = "https://secrets-api.appbrewery.com/";
 //TODO 1: Fill in your values for the 3 types of auth.
 const yourUsername = "jackhenry";
 const yourPassword = "qwer123";
-const yourAPIKey = "asdf1a2sdf1a2sdf12qwer1t2ry12df";
-const yourBearerToken = "asdf21qwe5r45sdaetsat12esd2g1";
+const yourAPIKey = "576bfb1f-fece-4793-816b-8c6ad9e1877e";
+const yourBearerToken = "ab2b2c22-4090-4d33-b83e-085972b4b00a";
 
 app.get("/", (req, res) => {
   res.render("index.ejs", { content: "API Response." });
@@ -76,7 +76,7 @@ app.get("/apiKey", async (req, res) => {
       {
         params: {
           score: 8,
-          apiKey: "576bfb1f-fece-4793-816b-8c6ad9e1877e",
+          apiKey: yourAPIKey,
         },
       }
     );
@@ -93,6 +93,10 @@ app.get("/apiKey", async (req, res) => {
   }
 });
 
+const config = {
+  headers: { Authorization: `Bearer ${yourBearerToken}`}};
+  
+
 app.get("/bearerToken", async (req, res) => {
   //TODO 5: Write your code here to hit up the /secrets/{id} endpoint
   //and get the secret with id of 42
@@ -105,18 +109,9 @@ app.get("/bearerToken", async (req, res) => {
     },
   });
   */
+  
   try {
-    const responsetoken = await axios.get(`${API_URL}secrets/1`,
-      {
-        auth: {
-          username: yourUsername,
-          password: yourPassword,
-        },
-        headers: {
-          Authorization: `Bearer ab2b2c22-4090-4d33-b83e-085972b4b00a`,
-        },
-      }
-    );
+    const responsetoken = await axios.get(`${API_URL}secrets/2`, config);
     const datatoken = JSON.stringify(responsetoken.data);
     res.render("index.ejs", {
       content: datatoken,
