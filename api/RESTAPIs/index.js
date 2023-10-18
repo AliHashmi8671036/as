@@ -14,7 +14,7 @@ const API_URL = "https://secrets-api.appbrewery.com";
 //TODO 1: Add your own bearer token from the previous lesson.
 const yourUsername = "jackhenry";
 const yourPassword = "qwer123";
-const yourBearerToken = "0ad4cb90-5412-4f6e-a2d0-60d64c789b1d";
+const yourBearerToken = "28e80a4b-ce39-4180-b4e4-f4745fa9b03f";
 const config = {
   headers: { Authorization: `Bearer ${yourBearerToken}` },
 };
@@ -45,7 +45,7 @@ app.post("/post-secret", async (req, res) => {
       score: req.body['score'],
     }, {
       headers: {
-        Authorization: `Bearer 0ad4cb90-5412-4f6e-a2d0-60d64c789b1d`,
+        Authorization: `Bearer 28e80a4b-ce39-4180-b4e4-f4745fa9b03f`,
       }
     },
     );
@@ -59,14 +59,15 @@ app.post("/post-secret", async (req, res) => {
 app.post("/put-secret", async (req, res) => {
   // TODO 3: Use axios to PUT the data from req.body to the secrets api servers.
   const searchId = req.body.id;
-  console.log(req.body)
+  console.log(req.body);
   try {
-    const result = await axios.put(`${API_URL}/secrets/${searchId}`,{
-      secret: req.body.secret,
-      score: req.body.score,
+    const result = await axios.put("https://secrets-api.appbrewery.com/secrets/65",
+    {
+      secret: 'updated secret',
+      score: 8,
     }, {
       headers: {
-        Authorization: `Bearer 0ad4cb90-5412-4f6e-a2d0-60d64c789b1d`,
+        Authorization: `Bearer 28e80a4b-ce39-4180-b4e4-f4745fa9b03f`,
       }
     },
     );
@@ -103,13 +104,12 @@ app.post("/delete-secret", async (req, res) => {
   const searchId = req.body.id;
   // TODO 5: Use axios to DELETE the item with searchId from the secrets api servers.
   try {
-    const result = await axios.delete(`${API_URL}/secrets/${searchId}`, config);
-    const res = JSON.stringify(result.data);
-    res.render("index.ejs", { content: res });
+    const result = await axios.delete(`${API_URL}/secrets/${searchId}`, { headers: { Authorization: `Bearer 28e80a4b-ce39-4180-b4e4-f4745fa9b03f` } });
+    res.render("index.ejs", { content: JSON.stringify(result.data) } );
   } catch (error) {
-      res.render("index.ejs", { content: JSON.stringify(error.response.data) });
+    console.log('Error:', error.message);
+    res.render("index.ejs", { content: JSON.stringify(error.response.data) } );
   }
-
 });
 
 app.listen(port, () => {
