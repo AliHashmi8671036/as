@@ -12,13 +12,7 @@ app.use(express.static("public"));
 
 const API_URL = "http://localhost:3000";
 
-//1. GET a random joke
-
-app.get("/random", async (req, res)=> {
-
-  const randomJoke = jokes[Math.floor(Math.random()*jokes.length)];
-  res.json(randomJoke);
-  // try {
+// try {
   //   const result = await axios.get(`${API_URL}/random`);
   //   const data = result.data;
   //   res.render("index.ejs", {
@@ -30,25 +24,83 @@ app.get("/random", async (req, res)=> {
   //     error: error.message,
   //   });
   // }
+
+//1. GET a random joke
+
+app.get("/random", (req, res)=> {
+
+  const randomJoke = jokes[Math.floor(Math.random()*jokes.length)];
+  res.json(randomJoke);
 });
 
 //2. GET a specific joke
-app.get("/jokes/id", async(req, res)=> {
-  const index = id-1;
-  res.json(jokes[index]);
-
+app.get("/jokes/:id", (req, res)=> {
+  const id = parseInt(req.params.id);
+  const specificJoke = jokes.find((a) => a.id === id);
+  res.json(specificJoke);
 });
 
 //3. GET a jokes by filtering on the joke type
+app.get("/filter", (req, res) => {
+  const type = req.query.type;
+  const filterType = jokes.filter((a)=> a.jokeType === type);
+  res.json(filterType);
+});
 
 //4. POST a new joke
+app.post("/jokes", (req, res)=> {
+  const newJoke = {
+    id: jokes.length + 1,
+    jokeText: req.body.text,
+    jokeType: req.body.type,
+  };
+  jokes.push(newJoke);
+  console.log(jokes.slice(-1));
+  res.json(newJoke);
+});
 
 //5. PUT a joke
+app.put("/jokes/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const updateJoke = {
+    id: id,
+    jokeText: req.body.text,
+    jokeType: req.body.type,
+  };
+  const searchId = jokes.findIndex((a) => a.id === id);
+  jokes[searchId] = updateJoke;
+  res.json(updateJoke);
+});
 
 
 //6. PATCH a joke
+app.patch("/jokes/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const findJoke = jokes.find((a) => a.id === id);
+  const patchJoke = {
+    id: id,
+    jokeText: req.body.text || findJoke.jokeText,
+    jokeType: req.body.type || findJoke.jokeType,
+  };
+  const searchId = jokes.findIndex((a) => a.id === id);
+  jokes[searchId] = patchJoke;
+  res.json(patchJoke);
+});
 
 //7. DELETE Specific joke
+app.delete("/jokes/:id", (req, res)=> {
+  const id = parseInt(req.params.id);
+  const searchId = jokes.findIndex((a) => a.id === id );
+  if(searchId > -1) {
+    jokes.slice(searchId, 1);
+    res.sendStatus(200);
+  } else {
+    res
+      .status(404)
+      .json({ error: `Joke with id: ${id} not found. No jokes were deleted.`});
+  }
+
+})
 
 //8. DELETE All jokes
 
