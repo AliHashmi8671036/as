@@ -5,7 +5,7 @@ import axios from "axios";
 
 const app = express();
 const port = 3000;
-const masterKey = "4VGP2DN-6EWM4SJ-N6FGRHV-Z3PR3TT";
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -92,7 +92,7 @@ app.delete("/jokes/:id", (req, res)=> {
   const id = parseInt(req.params.id);
   const searchId = jokes.findIndex((a) => a.id === id );
   if(searchId > -1) {
-    jokes.slice(searchId, 1);
+    jokes.splice(searchId, 1);
     res.sendStatus(200);
   } else {
     res
@@ -102,7 +102,21 @@ app.delete("/jokes/:id", (req, res)=> {
 
 })
 
+const masterKey = "4VGP2DN-6EWM4SJ-N6FGRHV-Z3PR3TT";
+
 //8. DELETE All jokes
+app.delete("/all", (req, res) => {
+  const userkey = req.query.key;
+  if(userkey === masterKey) {
+    jokes = [];
+    res.sendStatus(200)
+  } else {
+    res
+      .status(404)
+      .json({ error: `Not allowed`});
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);
