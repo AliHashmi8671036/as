@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+</head>
+
+<body>
+  <div class="container">
+    <h1>My Blog</h1>
+    <ul id="postsList">
+        <li>
+          <h2>
+            <%=posts.title%>
+          </h2>
+          <small>
+            <%=posts.date %>
+          </small>
+          <p>
+            <%=posts.content%>
+          </p>
+          <small>By: <%=posts.author%> </small>
+          <a class="edit" href="/edit/<%= posts.id %>">Edit</a>
+          <a class="delete" href="/api/posts/delete/<%= posts.id %>">Delete</a>
+        </li>
+    </ul>
+  </div>
+
+</body>
+
+</html>

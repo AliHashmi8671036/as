@@ -50,37 +50,85 @@ app.get("/", (req, res)=> {
   });
 });
 
-
 //CHALLENGE 2: GET a specific post by id
 
 app.get("/posts/:id", (req, res)=> {
   const specId = parseInt(req.params.id);
-  const specPost = posts.find((a)=> a.id === specId);
-  if(specPost) {
-    res.json(specPost);
+  const post = posts.find((a)=> a.id === specId);
+  // console.log(specPost);
+  if(post) {
+    res.render("index.ejs", {
+      specpost: post,
+    });
   } else {
     res
       .sendStatus(404)
       .json({ error: `post not found`});
-  }
-  
+  }  
 });
 
 //CHALLENGE 3: POST a new post
-app.post("/new", (req, res)=> {
+app.get ("/new", (req, res)=> {
+  res.render("modify.ejs",{
+    heading: "New Post",
+    submit: "Create Post",
+  });
+})
+const date = new Date();
+app.post("/api/posts", (req, res)=> {
   const newPost = {
     id: posts.length + 1,
     title: req.body.title,
     content: req.body.content,
     author: req.body.author,
-    date: req.body.date,
-  }
+    date: date.toISOString(),
+  };
+  posts.push(newPost);
+  res.redirect("/");
 });
 
 
 //CHALLENGE 4: PATCH a post when you just want to update one parameter
+app.get ("/edit/:id", (req, res)=> {
+  const id = parseInt(req.params.id);
+  const prepost = posts.find((a)=> a.id === id);
+  res.render("modify.ejs",{
+    heading: "Edit Post",
+    submit: "Update Post",
+    post: prepost,
+
+  });
+});
+
+app.post("/api/posts/:id", (req, res) => {
+  const patchid = parseInt(req.params.id);
+  const prepost = posts.find((a)=> a.id === patchid);
+  const uppost = {
+    id: patchid,
+    title: req.body.title || prepost.title,
+    content: req.body.content || prepost.content,
+    author: req.body.author || prepost.author,
+  };
+  const searchId = posts.findIndex((a)=>a.id===patchid);
+  posts[searchId] = uppost;
+ res.redirect("/");
+});
 
 //CHALLENGE 5: DELETE a specific post by providing the post id.
+
+app.get("/api/posts/delete/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const postIndex = posts.findIndex((a)=> a.id === id);
+  if(postIndex) {
+    posts.splice(postIndex, 1);
+  } else {
+    res 
+      .status(404)
+      .json({ error: `Not deleted.`})  
+  }
+  res.redirect("/");
+});
+
 
 app.listen(port, () => {
   console.log(`API is running at http://localhost:${port}`);
