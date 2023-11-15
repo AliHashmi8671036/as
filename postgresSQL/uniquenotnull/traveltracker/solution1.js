@@ -20,6 +20,7 @@ app.use(express.static("public"));
 // GET home page
 app.get("/", async (req, res) => {
   const result = await db.query("SELECT country_code FROM visited_countries");
+  console.log(result.rows);
   let countries = [];
   result.rows.forEach((country) => {
     countries.push(country.country_code);
