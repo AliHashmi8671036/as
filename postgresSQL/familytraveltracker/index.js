@@ -21,15 +21,17 @@ let currentUserId = 1;
 
 let users = [
   { id: 1, name: "Angela", color: "teal" },
-  { id: 2, name: "Jack", color: "powderblue" },
+  { id: 2, name: "Amy", color: "powderblue" },
 ];
 
 async function checkVisisted() {
-  const result = await db.query("SELECT country_code FROM visited_countries");
+  const result = await db.query("SELECT country_code FROM visited_countries1");
+  // console.log(result.rows);
   let countries = [];
   result.rows.forEach((country) => {
     countries.push(country.country_code);
   });
+  // console.log(countries);
   return countries;
 }
 app.get("/", async (req, res) => {
@@ -65,7 +67,20 @@ app.post("/add", async (req, res) => {
     console.log(err);
   }
 });
-app.post("/user", async (req, res) => {});
+app.post("/user", async (req, res) => {
+  
+  // const uname
+  const uid = req.body['user'];
+  const result = await db.query("SELECT country_code from visited_countries1 where users_id= $1;",
+  [uid]);
+  // console.log(result.rows);
+  let countries = [];
+  result.rows.forEach((country) => {
+    countries.push(country.country_code);
+  });
+  console.log(countries);
+  return countries;
+});
 
 app.post("/new", async (req, res) => {
   //Hint: The RETURNING keyword can return the data that was inserted.
